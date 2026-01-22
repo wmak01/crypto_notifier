@@ -1,5 +1,22 @@
 def evaluate(price, ref_price, balance, cash, config):
     decisions = []
+    
+    # If reference price is not available yet, no trading signals
+    if ref_price is None:
+        return decisions
+
+    # HOLD LOGIC - Check if price is in neutral band first
+    hold_band = config.get("hold_band_pct", 5) / 100  # Convert to decimal (default ±5%)
+    hold_lower = ref_price * (1 - hold_band)
+    hold_upper = ref_price * (1 + hold_band)
+    
+    if hold_lower <= price <= hold_upper:
+        decisions.append({
+            "type": "HOLD",
+            "reason": f"Price within ±{config.get('hold_band_pct', 5)}% neutral band",
+            "price": round(price, 2)
+        })
+        return decisions  # Exit early, no buy/sell when in HOLD zone
 
     # SELL LOGIC
     for step in config["sell_steps"]:
@@ -24,3 +41,4 @@ def evaluate(price, ref_price, balance, cash, config):
             })
 
     return decisions
+

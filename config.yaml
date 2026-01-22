@@ -1,5 +1,7 @@
 check_interval_sec: 60
 
+hold_band_pct: 5  # ±5% neutral band around reference price for HOLD state
+
 buffer:
   sell: 1.015   # +1.5% buffer for selling
   buy: 0.985    # -1.5% buffer for buying
@@ -19,8 +21,3 @@ buy_steps:
     buy_pct: 0.25
   - trigger_pct: -40
     buy_pct: 0.40
-
-email:
-  sender: "YOUR_EMAIL@gmail.com"
-  receiver: "YOUR_EMAIL@gmail.com"
-  app_password: "YOUR_GMAIL_APP_PASSWORD"

@@ -1,3 +1,4 @@
 {
-  "pending": false
+  "pending": false,
+  "note": "Testing mode - email disabled, pending check skipped"
 }
