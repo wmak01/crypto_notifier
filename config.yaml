@@ -1,0 +1,26 @@
+check_interval_sec: 60
+
+buffer:
+  sell: 1.015   # +1.5% buffer for selling
+  buy: 0.985    # -1.5% buffer for buying
+
+sell_steps:
+  - trigger_pct: 10
+    sell_pct: 0.10
+  - trigger_pct: 20
+    sell_pct: 0.15
+  - trigger_pct: 30
+    sell_pct: 0.20
+
+buy_steps:
+  - trigger_pct: -20
+    buy_pct: 0.15
+  - trigger_pct: -30
+    buy_pct: 0.25
+  - trigger_pct: -40
+    buy_pct: 0.40
+
+email:
+  sender: "YOUR_EMAIL@gmail.com"
+  receiver: "YOUR_EMAIL@gmail.com"
+  app_password: "YOUR_GMAIL_APP_PASSWORD"
