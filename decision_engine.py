@@ -1,4 +1,4 @@
-def evaluate(price, ref_price, balance, cash, config):
+def evaluate(price, ref_price, balance, cash, config, cost_basis=None):
     decisions = []
     
     # If reference price is not available yet, no trading signals
@@ -18,15 +18,23 @@ def evaluate(price, ref_price, balance, cash, config):
         })
         return decisions  # Exit early, no buy/sell when in HOLD zone
 
-    # SELL LOGIC
+    # SELL LOGIC - Only sell if profitable
     for step in config["sell_steps"]:
         trigger_price = ref_price * (1 + step["trigger_pct"] / 100) * config["buffer"]["sell"]
+        
+        # Check if price meets trigger AND is above cost basis (profitable)
         if price >= trigger_price:
+            # If cost basis is known, only sell if profitable (0.5% minimum profit)
+            if cost_basis is not None and price <= cost_basis * 1.005:
+                # Skip this sell - price not high enough for profit (need at least 0.5% gain)
+                continue
+            
             decisions.append({
                 "type": "SELL",
                 "amount_eth": round(balance * step["sell_pct"], 6),
                 "trigger_pct": step["trigger_pct"],
-                "price": round(price, 2)
+                "price": round(price, 2),
+                "cost_basis": cost_basis
             })
 
     # BUY LOGIC

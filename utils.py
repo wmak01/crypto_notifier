@@ -3,9 +3,16 @@ import os
 from datetime import datetime
 
 PENDING_FILE = "pending.json"
-PRICE_HISTORY_FILE = "prices_history.json"
 MAX_PRICE_HISTORY = 100  # Keep last 100 prices
 TIME_GAP_THRESHOLD = 300  # 5 minutes in seconds
+
+# Will be set dynamically per instance
+PRICE_HISTORY_FILE = "prices_history.json"
+
+def set_price_history_file(base_name):
+    """Set the price history file based on state file (e.g., state_btc.txt -> prices_history_btc.json)"""
+    global PRICE_HISTORY_FILE
+    PRICE_HISTORY_FILE = f"prices_history_{base_name}.json" if base_name != "state" else "prices_history.json"
 
 def load_pending():
     if not os.path.exists(PENDING_FILE):
