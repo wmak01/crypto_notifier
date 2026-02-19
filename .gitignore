@@ -1,0 +1,25 @@
+# Environment
+.venv/
+__pycache__/
+*.pyc
+.env
+
+# Configuration with secrets
+config.yaml
+config.json
+config.JSON
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files (optional - remove if you want to track them)
+*.log
+output.log
+run_log.txt
