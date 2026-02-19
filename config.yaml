@@ -2,10 +2,57 @@ check_interval_sec: 60
 
 hold_band_pct: 5  # ±5% neutral band around reference price for HOLD state
 
+# ==================== TELEGRAM NOTIFICATIONS ====================
+telegram:
+  enabled: true
+  bot_token: "8526045438:AAEPychHZbDFC1FyoS-M9SIueoF0TVIj_sY"
+  chat_id: "7826666073"
+  
+  # What alerts to send
+  notify_buy: true
+  notify_sell: true
+  notify_hold: false  # Set to true to get frequent HOLD updates
+  
+# Profit-taking strategy (trailing stops - dynamic, not fixed percentages)
+trailing_stop:
+  enabled: true
+  low_volatility_pct: 3      # 3% trail in low volatility
+  moderate_volatility_pct: 6  # 6% trail in moderate volatility
+  high_volatility_pct: 10     # 10% trail in high volatility
+  extreme_volatility_pct: 15  # 15% trail in extreme volatility
+
+# Buy conviction thresholds (intelligent buying, not fixed levels)
+buy_strategy:
+  min_conviction_score: 60    # Score out of 100 to trigger buy signal
+  base_buy_allocation: 0.25   # 25% of cash per high-conviction signal
+  min_profit_threshold: 0.005  # 0.5% minimum profit to exit
+
+# Historical data analysis
+historical_data:
+  enabled: true
+  lookback_days: 90  # Analyze past 90 days for patterns
+  cache_fresh_hours: 6  # Refresh cache every 6 hours
+  
+# RSI and technical indicators
+indicators:
+  rsi_period: 14
+  rsi_oversold: 30
+  rsi_overbought: 70
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+
+# Risk management
+risk_management:
+  max_loss_per_trade: 5  # Stop out if loss exceeds 5%
+  extreme_volatility_hold: true  # Hold/don't panic sell in extreme vol
+  capitulation_detection: true  # Detect panic selling
+
 buffer:
   sell: 1.015   # +1.5% buffer for selling
   buy: 0.985    # -1.5% buffer for buying
 
+# Legacy buy/sell steps (deprecated - using multi-factor scoring now)
 sell_steps:
   - trigger_pct: 10
     sell_pct: 0.10

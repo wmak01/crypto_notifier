@@ -1,0 +1,58 @@
+# ⚡ Quick Telegram Setup - 5 Minute Checklist
+
+## What You Need:
+- [ ] Telegram app installed on your phone
+- [ ] Bot token from BotFather
+- [ ] Your chat ID
+
+---
+
+## 🔴 QUICK STEPS:
+
+### 1️⃣ Phone Setup (3 min)
+```
+Telegram App
+  → Search: @BotFather
+  → Type: /newbot
+  → Name your bot: CryptoNotifier
+  → Create username: CryptoNotifier_YourName_Bot
+  
+💾 SAVE THE TOKEN (long string with numbers and letters)
+```
+
+### 2️⃣ Get Chat ID (2 min)
+```
+Telegram App
+  → Search for your new bot: CryptoNotifier_YourName_Bot
+  → Click START
+
+Then in browser:
+  → Visit: https://api.telegram.org/bot[YOUR_TOKEN]/getUpdates
+  → Replace [YOUR_TOKEN] with your token from step 1
+  → Look for: "chat":{"id":YOUR_CHAT_ID}
+  
+💾 SAVE THE CHAT ID (looks like: 123456789)
+```
+
+### 3️⃣ Add to Config (1 min)
+```
+File: config.yaml
+
+telegram:
+  enabled: true
+  bot_token: "YOUR_TOKEN_HERE"
+  chat_id: "YOUR_CHAT_ID_HERE"
+```
+
+---
+
+## ✅ Done!
+
+Now when your program gets BUY/SELL signals, you'll get Telegram notifications instantly!
+
+---
+
+## 📧 Still need help?
+
+See: TELEGRAM_SETUP.md (full guide with screenshots)
+
