@@ -4,24 +4,21 @@ import sys
 import os
 from price_fetcher import get_price
 from decision_engine import evaluate
-from notifier import send_email
-from notifier_telegram import send_telegram_message, format_alert
-from utils import load_pending, save_pending, add_price_to_history, calculate_moving_average, get_current_timestamp, check_time_gap, clear_price_history
-from trade_logger import log_trade, get_trade_stats
-from state_updater import update_cost_basis_after_buy, update_balance_after_sell, calculate_days_to_breakeven
-from historical_analyzer import fetch_historical_data, analyze_price_action
-from trailing_stop_manager import TrailingStopManager
-from pattern_analyzer import calculate_rsi, detect_capitulation, generate_buy_conviction_score, generate_sell_signal_with_explanation
-from signal_state_tracker import SignalStateTracker
+from modules.notifier_telegram import send_telegram_message, format_alert
+from utils_core import load_pending, save_pending, add_price_to_history, calculate_moving_average, get_current_timestamp, check_time_gap, clear_price_history
+from modules.historical_analyzer import fetch_historical_data, analyze_price_action
+from modules.trailing_stop_manager import TrailingStopManager
+from modules.pattern_analyzer import calculate_rsi, detect_capitulation, generate_buy_conviction_score, generate_sell_signal_with_explanation
+from modules.signal_state_tracker import SignalStateTracker
 
 # Fix encoding for Windows terminal
 if sys.stdout.encoding != 'utf-8':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-# Get state file from command line argument, default to state.txt
-STATE_FILE = sys.argv[1] if len(sys.argv) > 1 else "state.txt"
-PRICE_HISTORY_FILE_BASE = STATE_FILE.replace('.txt', '')
+# Get state file from command line argument, default to data/state.txt
+STATE_FILE = os.path.join("data", sys.argv[1]) if len(sys.argv) > 1 else "data/state.txt"
+PRICE_HISTORY_FILE_BASE = os.path.join("data", sys.argv[1].replace('.txt', '')) if len(sys.argv) > 1 else "data/state"
 
 def load_state():
     state = {}
@@ -44,7 +41,7 @@ print(f"[INFO] Features: Trailing Stops | Historical Data | Pattern Recognition 
 print("-" * 80)
 
 # Initialize price history file for this instance
-from utils import set_price_history_file
+from utils_core import set_price_history_file
 set_price_history_file(PRICE_HISTORY_FILE_BASE)
 
 # Initialize trailing stop manager

@@ -1,4 +1,4 @@
-from pattern_analyzer import (
+from modules.pattern_analyzer import (
     calculate_rsi, 
     generate_buy_conviction_score,
     generate_sell_signal_with_explanation

@@ -8,11 +8,12 @@ import os
 
 def get_price_data(filename):
     """Get price history data"""
-    if not os.path.exists(filename):
+    filepath = os.path.join("data", filename)
+    if not os.path.exists(filepath):
         return None
     
     try:
-        with open(filename, 'r') as f:
+        with open(filepath, 'r') as f:
             data = json.load(f)
             prices = data if isinstance(data, list) else data.get('prices', [])
             return prices

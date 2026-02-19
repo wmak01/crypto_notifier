@@ -15,7 +15,7 @@ def main():
     # Launch ETH tracker
     print("\n📊 Starting ETH tracker...")
     eth_process = subprocess.Popen(
-        [sys.executable, "main.py", "state.txt"],
+        [sys.executable, os.path.join("..", "main.py"), "state.txt"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
@@ -27,7 +27,7 @@ def main():
     # Launch BTC tracker
     print("\n📊 Starting BTC tracker...")
     btc_process = subprocess.Popen(
-        [sys.executable, "main.py", "state_btc.txt"],
+        [sys.executable, os.path.join("..", "main.py"), "state_btc.txt"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
@@ -39,8 +39,8 @@ def main():
     print("✅ BOTH TRACKERS RUNNING")
     print("="*60)
     print("\n📊 Monitoring:")
-    print("   - ETH: Tracking state.txt")
-    print("   - BTC: Tracking state_btc.txt")
+    print("   - ETH: Tracking data/state.txt")
+    print("   - BTC: Tracking data/state_btc.txt")
     print("\n💡 To check status: python dual_dashboard.py")
     print("💡 To stop: Ctrl+C or close this window")
     print("\n" + "="*60)

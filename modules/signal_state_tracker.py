@@ -8,7 +8,7 @@ Tracks previous signals and only sends Telegram when:
 import json
 import os
 from datetime import datetime
-from confidence_levels import (
+from .confidence_levels import (
     get_confidence_level, 
     format_confidence_display,
     format_decision_table,

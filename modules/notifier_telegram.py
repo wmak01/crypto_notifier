@@ -7,7 +7,7 @@ Shows confidence levels and decision scenarios.
 import requests
 import json
 from datetime import datetime
-from confidence_levels import get_confidence_level, format_confidence_display
+from .confidence_levels import get_confidence_level, format_confidence_display
 
 TELEGRAM_API_URL = "https://api.telegram.org/bot"
 

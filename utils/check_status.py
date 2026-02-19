@@ -5,7 +5,7 @@ Check app status - shows current iteration count and progress
 import json
 import os
 
-price_history_file = "prices_history.json"
+price_history_file = os.path.join("..", "data", "prices_history.json")
 
 if os.path.exists(price_history_file):
     with open(price_history_file, 'r') as f:
